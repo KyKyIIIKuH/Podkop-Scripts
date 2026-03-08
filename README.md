@@ -26,6 +26,8 @@ crontab -e
 ``` bash
 # Обновление подписки с перезапуском Podkop
 0 0 * * * /etc/subs.sh restart
+
+# Проверяем наличие соединения
 */1 0 0 * * * /etc/check-connection.sh restart
 ```
 
