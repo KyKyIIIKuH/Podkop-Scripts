@@ -1,7 +1,7 @@
 # Podkop-Scripts
 
 <p align="center">
-  <a href="README_EN.md">English version</a> – English version of this README
+  <a href="README_en.md">English version</a> – English version of this README
 </p>
 
 Набор скриптов для упрощения работы с **Podkop** и автоматизации
