@@ -77,50 +77,42 @@ get_current_proxy() {
 switch_to_next_proxy() {
     local group_tag="$1"
     local current_proxy="$2"
-    
-    # Get all available proxies
-    local available_proxies
-    available_proxies=$(get_available_proxies "$group_tag")
-    
-    if [ -z "$available_proxies" ]; then
+
+    local proxies
+    proxies=$(get_available_proxies "$group_tag")
+
+    if [ -z "$proxies" ]; then
         log_msg "No available proxies found"
         return 1
     fi
-    
-    # Convert to array
-    local proxies_array=()
-    while IFS= read -r proxy; do
-        [ -n "$proxy" ] && proxies_array+=("$proxy")
-    done <<< "$available_proxies"
-    
-    local total_proxies=${#proxies_array[@]}
-    
-    if [ "$total_proxies" -eq 0 ]; then
-        log_msg "No proxies available in group"
-        return 1
-    fi
-    
-    # Find current proxy index and select next one
-    local next_index=0
-    local found_current=0
-    
-    for i in $(seq 0 $((total_proxies - 1))); do
-        if [ "${proxies_array[$i]}" = "$current_proxy" ]; then
-            next_index=$(( (i + 1) % total_proxies ))
-            found_current=1
+
+    local next_proxy=""
+    local found=0
+    local first_proxy=""
+
+    for proxy in $proxies; do
+        [ -z "$first_proxy" ] && first_proxy="$proxy"
+
+        if [ "$found" = "1" ]; then
+            next_proxy="$proxy"
             break
         fi
+
+        if [ "$proxy" = "$current_proxy" ]; then
+            found=1
+        fi
     done
-    
-    local next_proxy="${proxies_array[$next_index]}"
-    
+
+    # если текущий был последний → берем первый
+    if [ -z "$next_proxy" ]; then
+        next_proxy="$first_proxy"
+    fi
+
     log_msg "Switching from '$current_proxy' to '$next_proxy'"
-    
-    # Use clash_api to set the new proxy
-    local result
+
     result=$("$PODKOP_BIN" clash_api set_group_proxy "$group_tag" "$next_proxy" 2>/dev/null)
-    
-    if echo "$result" | jq -e '.success' > /dev/null 2>&1; then
+
+    if echo "$result" | jq -e '.success' >/dev/null 2>&1; then
         log_msg "✅ Successfully switched to '$next_proxy'"
         return 0
     else
