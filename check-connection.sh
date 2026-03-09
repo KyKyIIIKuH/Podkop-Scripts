@@ -8,7 +8,7 @@
 PODKOP_BIN="/usr/bin/podkop"
 
 # Configuration
-TEST_URL="https://www.gstatic.com/generate_204"
+TEST_URL="https://xvideos.com"
 CHECK_TIMEOUT=5
 MAX_RETRIES=3
 DELAY_BETWEEN_CHECKS=3
