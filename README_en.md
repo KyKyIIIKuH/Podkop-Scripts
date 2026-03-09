@@ -66,7 +66,7 @@ Functions:
 Example run:
 
 ```bash
-bash /etc/subs.sh restart
+bash /etc/subs.sh
 ```
 
 ---
