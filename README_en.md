@@ -43,7 +43,7 @@ Add the following lines:
 
 ```bash
 # Update subscription with Podkop restart
-0 0 * * * /etc/subs.sh restart
+0 0 * * * /etc/subs.sh
 
 # Check internet connection
 */1 * * * * /etc/check-connection.sh
