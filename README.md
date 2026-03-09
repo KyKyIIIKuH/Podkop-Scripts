@@ -1,5 +1,3 @@
-# README.md
-
 # Podkop-Scripts
 
 <p align="center">
