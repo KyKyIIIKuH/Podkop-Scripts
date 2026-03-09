@@ -1,7 +1,5 @@
 #!/bin/sh
 
-COMMAND="$1"
-
 CONFIG="/etc/config/podkop"
 TMP_FILE="/tmp/podkop_tmp"
 VLESS_URL="https://ССЫЛКА_НА_ПОДПИСКУ"
@@ -84,9 +82,7 @@ END {
 
 rm -f "$TMP_FILE"
 
-# --- Перезапускаем сервис только если есть параметр restart ---
-if [ "$COMMAND" = "restart" ]; then
-    restart_target
-fi
+# --- Перезапускаем сервис  ---
+restart_target
 
 echo "✅ selector_proxy_links обновлены"
