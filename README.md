@@ -49,7 +49,7 @@ crontab -e
 
 ``` bash
 # Обновление подписки с перезапуском Podkop
-0 0 * * * /etc/subs.sh restart
+0 0 * * * /etc/subs.sh
 
 # Проверяем наличие соединения
 */1 * * * * /etc/check-connection.sh
@@ -72,7 +72,7 @@ crontab -e
 Пример запуска:
 
 ``` bash
-bash /etc/subs.sh restart
+bash /etc/subs.sh
 ```
 
 ------------------------------------------------------------------------
