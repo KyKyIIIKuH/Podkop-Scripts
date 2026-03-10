@@ -18,7 +18,7 @@ DOMAIN=$(echo "$VLESS_URL" | sed -E 's#https?://([^/]+).*#\1#')
 DOMAIN_IDN=$(idn "$DOMAIN")
 
 # Собираем обратно URL
-URL_IDN=$(echo "$URL" | sed "s#$DOMAIN#$DOMAIN_IDN#")
+URL_IDN=$(echo "$VLESS_URL" | sed "s#$DOMAIN#$DOMAIN_IDN#")
 
 log() { echo "[$(date '+%F %T')] $*"; }
 
