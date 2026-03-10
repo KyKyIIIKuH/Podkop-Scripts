@@ -3,7 +3,7 @@
 # Fix curl | ash stdin issue
 if [ ! -t 0 ]; then
     TMP="/tmp/podkop-installer.sh"
-    curl -fsSL https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/main/install.sh -o "$TMP"
+    curl -fsSL https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/main/menu.sh -o "$TMP"
     chmod +x "$TMP"
     exec ash "$TMP"
 fi
