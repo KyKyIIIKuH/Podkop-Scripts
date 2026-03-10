@@ -1,5 +1,7 @@
 #!/bin/ash
 
+exec </dev/tty
+
 REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main"
 SUBS_FILE="/etc/subs.sh"
 CHECK_FILE="/etc/check-connection.sh"
@@ -20,8 +22,8 @@ install_subs() {
     chmod +x "$SUBS_FILE"
 
     echo ""
-    echo "Enter subscription URL:"
-    read VLESS_URL < /dev/tty
+    printf "Enter subscription URL: "
+    read VLESS_URL
 
     if [ -z "$VLESS_URL" ]; then
         echo "Subscription URL cannot be empty"
@@ -83,7 +85,7 @@ do
     echo ""
 
     printf "Select option: "
-    read choice < /dev/tty
+    read choice
 
     case "$choice" in
         1) install_subs ;;
