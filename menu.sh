@@ -8,6 +8,8 @@ install_subs() {
     echo ""
     echo "Downloading subs.sh..."
 
+    rm "$SUBS_FILE"
+
     curl -sL "$REPO/subs.sh" -o "$SUBS_FILE"
 
     if [ ! -f "$SUBS_FILE" ]; then
@@ -37,6 +39,8 @@ install_subs() {
 install_check() {
     echo ""
     echo "Downloading check-connection.sh..."
+
+    rm "$CHECK_FILE"
 
     curl -sL "$REPO/check-connection.sh" -o "$CHECK_FILE"
 
