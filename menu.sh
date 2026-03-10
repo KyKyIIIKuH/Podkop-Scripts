@@ -1,8 +1,13 @@
 #!/bin/ash
 
+clear
+
 REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main"
 SUBS_FILE="/etc/subs.sh"
 CHECK_FILE="/etc/check-connection.sh"
+
+# Файл crontab пользователя root
+CRON_FILE="/etc/crontabs/root"
 
 install_subs() {
     echo ""
@@ -30,6 +35,10 @@ install_subs() {
 
     sed -i "s|^VLESS_URL=.*|VLESS_URL=\"$VLESS_URL\"|g" "$SUBS_FILE"
 
+    # Проверяем и добавляем только если строки нет
+    grep -Fxq "0 0 * * * /etc/subs.sh" "$CRON_FILE" || \
+        echo "0 0 * * * /etc/subs.sh" >> "$CRON_FILE"
+
     sh "$SUBS_FILE"
 
     echo ""
@@ -50,6 +59,10 @@ install_check() {
     fi
 
     chmod +x "$CHECK_FILE"
+
+    # Проверяем и добавляем только если строки нет
+    grep -Fxq "*/1 * * * * /etc/check-connection.sh" "$CRON_FILE" || \
+        echo "*/1 * * * * /etc/check-connection.sh" >> "$CRON_FILE"
 
     echo "check-connection.sh installed!"
 }
