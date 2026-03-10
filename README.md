@@ -39,7 +39,7 @@ chmod +x /etc/check-connection.sh
 # ⬇️ Альтернативная установка через меню
 
 ``` bash
-wget -qO- https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main/menu.sh | sh
+wget -qO- --header="Cache-Control: no-cache" https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main/menu.sh | sh
 ```
 
 ------------------------------------------------------------------------
