@@ -4,7 +4,8 @@ REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/mai
 
 # Fix curl | ash stdin issue
 if [ ! -t 0 ]; then
-    TMP="/tmp/podkop-installer.sh"
+    TMP="/tmp/menu.sh"
+    echo "$REPO/menu.sh"
     curl -fsSL "$REPO/menu.sh" -o "$TMP"
     chmod +x "$TMP"
     exec ash "$TMP"
