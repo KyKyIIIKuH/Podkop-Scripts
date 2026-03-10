@@ -3,6 +3,15 @@
 CONFIG="/etc/config/podkop"
 TMP_FILE="/tmp/podkop_tmp"
 VLESS_URL="https://ССЫЛКА_НА_ПОДПИСКУ"
+PKG="idn"
+
+if ! opkg list-installed | grep -q "^$PKG "; then
+    echo "Package $PKG not installed. Installing..."
+    opkg update
+    opkg install $PKG
+else
+    echo "Package $PKG already installed."
+fi
 
 # Получаем домен из URL
 DOMAIN=$(echo "$VLESS_URL" | sed -E 's#https?://([^/]+).*#\1#')
