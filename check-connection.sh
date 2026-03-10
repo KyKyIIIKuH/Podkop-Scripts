@@ -131,6 +131,7 @@ main() {
 
         if check_internet_connection 2; then
             log_msg "✅ Connection restored"
+            /etc/subs.sh
             exit 0
         fi
     fi
