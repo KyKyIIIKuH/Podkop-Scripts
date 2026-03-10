@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ash
 
 CONFIG="/etc/config/podkop"
 TMP_FILE="/tmp/podkop_tmp"
