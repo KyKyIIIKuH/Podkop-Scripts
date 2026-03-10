@@ -1,15 +1,6 @@
 #!/bin/ash
 
 REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main"
-
-# Fix curl | ash stdin issue
-if [ ! -t 0 ]; then
-    TMP="/tmp/menu.sh"
-    curl -fsSL -H "Cache-Control: no-cache" "$REPO/menu.sh" -o "$TMP"
-    chmod +x "$TMP"
-    exec ash "$TMP"
-fi
-
 SUBS_FILE="/etc/subs.sh"
 CHECK_FILE="/etc/check-connection.sh"
 
