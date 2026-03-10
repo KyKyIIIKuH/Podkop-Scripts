@@ -47,6 +47,11 @@ wget --header="Cache-Control: no-cache" https://raw.githubusercontent.com/KyKyII
 ``` bash
 chmod +x /tmp/menu.sh
 ```
+Выполняем файл:
+
+``` bash
+/tmp/menu.sh
+```
 
 ------------------------------------------------------------------------
 
