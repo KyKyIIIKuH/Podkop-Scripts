@@ -6,7 +6,7 @@ REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/mai
 if [ ! -t 0 ]; then
     TMP="/tmp/menu.sh"
     echo "$REPO/menu.sh"
-    curl -fsSL "$REPO/menu.sh" -o "$TMP"
+    curl -fsSL -H "Cache-Control: no-cache" "$REPO/menu.sh" -o "$TMP"
     chmod +x "$TMP"
     exec ash "$TMP"
 fi
