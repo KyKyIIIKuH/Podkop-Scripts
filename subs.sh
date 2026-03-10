@@ -9,8 +9,6 @@ if ! opkg list-installed | grep -q "^$PKG "; then
     echo "Package $PKG not installed. Installing..."
     opkg update
     opkg install $PKG
-else
-    echo "Package $PKG already installed."
 fi
 
 # Получаем домен из URL
