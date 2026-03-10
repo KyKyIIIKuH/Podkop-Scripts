@@ -1,14 +1,15 @@
 #!/bin/ash
 
+REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main"
+
 # Fix curl | ash stdin issue
 if [ ! -t 0 ]; then
     TMP="/tmp/podkop-installer.sh"
-    curl -fsSL https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/main/menu.sh -o "$TMP"
+    curl -fsSL "$REPO/menu.sh" -o "$TMP"
     chmod +x "$TMP"
     exec ash "$TMP"
 fi
 
-REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main"
 SUBS_FILE="/etc/subs.sh"
 CHECK_FILE="/etc/check-connection.sh"
 
