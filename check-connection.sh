@@ -1,5 +1,19 @@
 #!/bin/ash
 
+LOCK_DIR="/tmp/check_proxy.lock"
+
+# Prevent multiple instances
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+    echo "Script already running"
+    exit 1
+fi
+
+cleanup() {
+    rmdir "$LOCK_DIR"
+}
+
+trap cleanup EXIT INT TERM
+
 #######################################
 # Check internet connection and switch to another server if needed
 #######################################
