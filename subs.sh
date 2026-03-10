@@ -4,6 +4,15 @@ CONFIG="/etc/config/podkop"
 TMP_FILE="/tmp/podkop_tmp"
 VLESS_URL="https://ССЫЛКА_НА_ПОДПИСКУ"
 
+# Получаем домен из URL
+DOMAIN=$(echo "$VLESS_URL" | sed -E 's#https?://([^/]+).*#\1#')
+
+# Конвертируем в punycode
+DOMAIN_IDN=$(idn "$DOMAIN")
+
+# Собираем обратно URL
+URL_IDN=$(echo "$URL" | sed "s#$DOMAIN#$DOMAIN_IDN#")
+
 log() { echo "[$(date '+%F %T')] $*"; }
 
 # --- Рестарт сервиса ---
@@ -25,7 +34,7 @@ restart_target() {
 }
 
 # --- Получаем список и декодируем base64 ---
-VLESS_LIST=$(wget --no-check-certificate --user-agent="KyKyIIIKuHVless" -qO- "$VLESS_URL" | base64 -d | grep 'vless://' | grep -v 'xhttp')
+VLESS_LIST=$(wget --no-check-certificate --user-agent="KyKyIIIKuHVless" -qO- "$URL_IDN" | base64 -d | grep 'vless://' | grep -v 'xhttp')
 
 if [ -z "$VLESS_LIST" ]; then
     echo "❌ Не удалось получить VLESS список"
