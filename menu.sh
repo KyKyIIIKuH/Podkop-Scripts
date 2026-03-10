@@ -8,7 +8,7 @@ install_subs() {
     echo ""
     echo "Downloading subs.sh..."
 
-    rm "$SUBS_FILE"
+    rm -f "$SUBS_FILE"
 
     curl -sL "$REPO/subs.sh" -o "$SUBS_FILE"
 
@@ -21,7 +21,7 @@ install_subs() {
 
     echo ""
     echo "Enter subscription URL:"
-    read VLESS_URL
+    read VLESS_URL < /dev/tty
 
     if [ -z "$VLESS_URL" ]; then
         echo "Subscription URL cannot be empty"
@@ -30,7 +30,7 @@ install_subs() {
 
     sed -i "s|^VLESS_URL=.*|VLESS_URL=\"$VLESS_URL\"|g" "$SUBS_FILE"
 
-    $SUBS_FILE
+    sh "$SUBS_FILE"
 
     echo ""
     echo "subs.sh installed and configured!"
@@ -40,7 +40,7 @@ install_check() {
     echo ""
     echo "Downloading check-connection.sh..."
 
-    rm "$CHECK_FILE"
+    rm -f "$CHECK_FILE"
 
     curl -sL "$REPO/check-connection.sh" -o "$CHECK_FILE"
 
@@ -83,7 +83,7 @@ do
     echo ""
 
     printf "Select option: "
-    read choice
+    read choice < /dev/tty
 
     case "$choice" in
         1) install_subs ;;
