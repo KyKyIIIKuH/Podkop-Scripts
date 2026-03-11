@@ -15,6 +15,12 @@ CHECK_FILE="/etc/check-connection.sh"
 # Файл crontab пользователя root
 CRON_FILE="/etc/crontabs/root"
 
+pause() {
+    echo ""
+    echo "Нажмите любую клавишу для возвращения в меню..."
+    read -n 1 -s
+}
+
 install_subs() {
     echo ""
     echo "Downloading subs.sh..."
@@ -108,13 +114,9 @@ self_update() {
     echo -e "${GREEN}Menu successfully updated${RESET}"
     echo "Restarting..."
 
+    pause
+    
     exec "$SELF"
-}
-
-pause() {
-    echo ""
-    echo "Нажмите любую клавишу для возвращения в меню..."
-    read -n 1 -s
 }
 
 while true
