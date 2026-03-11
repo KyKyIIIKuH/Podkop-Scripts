@@ -55,6 +55,9 @@ install_subs() {
 
     echo ""
     echo -e "${GREEN}subs.sh успешно установлен и настроен${RESET}"
+    
+    pause
+    exec "$SELF"
 }
 
 install_check() {
@@ -77,6 +80,9 @@ install_check() {
         echo "*/1 * * * * /etc/check-connection.sh" >> "$CRON_FILE"
 
     echo -e "${GREEN}check-connection.sh успешно установлен и настроен${RESET}"
+    
+    pause
+    exec "$SELF"
 }
 
 install_all() {
@@ -92,7 +98,6 @@ show_status() {
     [ -f "$CHECK_FILE" ] && echo "✔ check-connection.sh installed" || echo "✘ check-connection.sh not installed"
 
     pause
-    
     exec "$SELF"
 }
 
@@ -114,10 +119,7 @@ self_update() {
     mv "$TMP" "$SELF"
 
     echo -e "${GREEN}Menu successfully updated${RESET}"
-    echo "Restarting..."
-
     pause
-    
     exec "$SELF"
 }
 
