@@ -57,7 +57,7 @@ install_subs() {
     echo -e "${GREEN}subs.sh успешно установлен и настроен${RESET}"
     
     pause
-    exec "$SELF"
+    exec "/etc/$SELF"
 }
 
 install_check() {
@@ -82,7 +82,7 @@ install_check() {
     echo -e "${GREEN}check-connection.sh успешно установлен и настроен${RESET}"
     
     pause
-    exec "$SELF"
+    exec "/etc/$SELF"
 }
 
 install_all() {
@@ -119,15 +119,16 @@ self_update() {
     mv "$TMP" "$SELF"
 
     echo -e "${GREEN}Menu successfully updated${RESET}"
+    
     pause
-    exec "$SELF"
+    exec "/etc/$SELF"
 }
 
 while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v1.1"
+    echo " Podkop Scripts Installer v1.2"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
@@ -147,6 +148,6 @@ do
         4) show_status ;;
         5) self_update ;;
         0) exit 0 ;;
-        *)  exec "$SELF" ;;
+        *)  exec "/etc/$SELF" ;;
     esac
 done
