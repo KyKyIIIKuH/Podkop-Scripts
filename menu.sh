@@ -145,6 +145,6 @@ do
         4) show_status ;;
         5) self_update ;;
         0) exit 0 ;;
-        *) echo "Invalid option" ;;
+        *)  exec "$SELF" ;;
     esac
 done
