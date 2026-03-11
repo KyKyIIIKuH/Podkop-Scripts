@@ -111,6 +111,12 @@ self_update() {
     exec "$SELF"
 }
 
+pause() {
+    echo ""
+    echo "Нажмите любую клавишу для возвращения в меню..."
+    read -n 1 -s
+}
+
 while true
 do
     echo ""
@@ -132,7 +138,10 @@ do
         1) install_subs ;;
         2) install_check ;;
         3) install_all ;;
-        4) show_status ;;
+        4)
+            show_status
+            pause
+            ;;
         5) self_update ;;
         0) exit 0 ;;
         *) echo "Invalid option" ;;
