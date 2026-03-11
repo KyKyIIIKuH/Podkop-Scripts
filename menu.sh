@@ -59,6 +59,7 @@ install_subs() {
     echo -e "${GREEN}subs.sh успешно установлен и настроен${RESET}"
     
     pause
+    clear
 }
 
 install_check() {
@@ -83,6 +84,7 @@ install_check() {
     echo -e "${GREEN}check-connection.sh успешно установлен и настроен${RESET}"
     
     pause
+    clear
 }
 
 install_all() {
@@ -128,7 +130,7 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v1.8"
+    echo " Podkop Scripts Installer v1.9"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
