@@ -98,6 +98,7 @@ show_status() {
     [ -f "$CHECK_FILE" ] && echo "✔ check-connection.sh installed" || echo "✘ check-connection.sh not installed"
 
     pause
+    clear
 }
 
 self_update() {
@@ -127,7 +128,7 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v1.7"
+    echo " Podkop Scripts Installer v1.8"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
