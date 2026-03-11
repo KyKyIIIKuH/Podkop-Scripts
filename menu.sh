@@ -2,6 +2,8 @@
 
 clear
 
+SELF="$(basename "$0")"
+
 # Цвета ANSI
 RED="\033[1;31m"
 GREEN="\033[1;32m"
@@ -82,7 +84,7 @@ install_check() {
     echo -e "${GREEN}check-connection.sh успешно установлен и настроен${RESET}"
     
     pause
-    sh "$SELF"
+    sh "/etc/$SELF"
 }
 
 install_all() {
@@ -98,7 +100,7 @@ show_status() {
     [ -f "$CHECK_FILE" ] && echo "✔ check-connection.sh installed" || echo "✘ check-connection.sh not installed"
 
     pause
-    sh "$SELF"
+    sh "/etc/$SELF"
 }
 
 self_update() {
@@ -121,14 +123,14 @@ self_update() {
     echo -e "${GREEN}Menu successfully updated${RESET}"
     
     pause
-    sh "$SELF"
+    sh "/etc/$SELF"
 }
 
 while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v1.4"
+    echo " Podkop Scripts Installer v1.5"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
@@ -148,6 +150,6 @@ do
         4) show_status ;;
         5) self_update ;;
         0) exit 0 ;;
-        *)  sh "$SELF" ;;
+        *)  sh "/etc/$SELF" ;;
     esac
 done
