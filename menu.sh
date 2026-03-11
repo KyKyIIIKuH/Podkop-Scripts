@@ -88,6 +88,29 @@ show_status() {
     echo ""
 }
 
+self_update() {
+    echo ""
+    echo "Updating menu.sh..."
+
+    TMP="/tmp/menu_update.sh"
+    SELF="$0"
+
+    curl -fsSL "$REPO/menu.sh" -o "$TMP"
+
+    if [ ! -s "$TMP" ]; then
+        echo -e "${RED}Download failed${RESET}"
+        return
+    fi
+
+    chmod +x "$TMP"
+    mv "$TMP" "$SELF"
+
+    echo -e "${GREEN}Menu successfully updated${RESET}"
+    echo "Restarting..."
+
+    exec "$SELF"
+}
+
 while true
 do
     echo ""
@@ -98,6 +121,7 @@ do
     echo "2) Установить check-connection.sh"
     echo "3) Установить Всё"
     echo "4) Show status"
+    echo "5) Update menu"
     echo "0) Exit"
     echo ""
 
@@ -109,6 +133,7 @@ do
         2) install_check ;;
         3) install_all ;;
         4) show_status ;;
+        5) self_update ;;
         0) exit 0 ;;
         *) echo "Invalid option" ;;
     esac
