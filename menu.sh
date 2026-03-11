@@ -120,14 +120,14 @@ self_update() {
     echo -e "${GREEN}Menu successfully updated${RESET}"
     
     pause
-    exec "/etc/$SELF"
+    exec "$SELF"
 }
 
 while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v1.6"
+    echo " Podkop Scripts Installer v1.7"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
