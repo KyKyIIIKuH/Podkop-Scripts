@@ -2,6 +2,8 @@
 
 clear
 
+echo "v1.0"
+
 # Цвета ANSI
 RED="\033[1;31m"
 GREEN="\033[1;32m"
