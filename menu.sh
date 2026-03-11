@@ -91,7 +91,9 @@ show_status() {
     [ -f "$SUBS_FILE" ] && echo "✔ subs.sh installed" || echo "✘ subs.sh not installed"
     [ -f "$CHECK_FILE" ] && echo "✔ check-connection.sh installed" || echo "✘ check-connection.sh not installed"
 
-    echo ""
+    pause
+    
+    exec "$SELF"
 }
 
 self_update() {
@@ -123,7 +125,7 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v1.0"
+    echo " Podkop Scripts Installer v1.1"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
@@ -140,10 +142,7 @@ do
         1) install_subs ;;
         2) install_check ;;
         3) install_all ;;
-        4)
-            show_status
-            pause
-            ;;
+        4) show_status ;;
         5) self_update ;;
         0) exit 0 ;;
         *) echo "Invalid option" ;;
