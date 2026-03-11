@@ -120,7 +120,7 @@ self_update() {
     echo -e "${GREEN}Menu successfully updated${RESET}"
     
     pause
-    exec "/etc/$SELF
+    exec "/etc/$SELF"
 }
 
 while true
