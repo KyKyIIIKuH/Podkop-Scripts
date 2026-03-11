@@ -39,7 +39,7 @@ chmod +x /etc/check-connection.sh
 # ⬇️ Альтернативная установка через меню
 
 ``` bash
-wget  https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main/menu.sh -O /etc/podkop_menu.sh
+wget https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main/menu.sh -O /etc/podkop_menu.sh
 ```
 
 Выдайте права на выполнение:
