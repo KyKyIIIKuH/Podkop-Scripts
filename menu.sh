@@ -2,8 +2,6 @@
 
 clear
 
-echo "v1.0"
-
 # Цвета ANSI
 RED="\033[1;31m"
 GREEN="\033[1;32m"
@@ -123,7 +121,7 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer"
+    echo " Podkop Scripts Installer v1.0"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
