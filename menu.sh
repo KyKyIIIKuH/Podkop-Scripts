@@ -2,6 +2,12 @@
 
 clear
 
+# Цвета ANSI
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
+RESET="\033[0m"
+
 REPO="https://raw.githubusercontent.com/KyKyIIIKuH/Podkop-Scripts/refs/heads/main"
 SUBS_FILE="/etc/subs.sh"
 CHECK_FILE="/etc/check-connection.sh"
@@ -25,11 +31,11 @@ install_subs() {
     chmod +x "$SUBS_FILE"
 
     echo ""
-    printf "Enter subscription URL: "
+    echo -e "${YELLOW}Укажите ссылку на подписку: ${RESET}"
     read VLESS_URL
 
     if [ -z "$VLESS_URL" ]; then
-        echo "Subscription URL cannot be empty"
+        echo -e "${RED}Ссылка подписки не может быть пустой${RESET}"
         return
     fi
 
@@ -42,7 +48,7 @@ install_subs() {
     sh "$SUBS_FILE"
 
     echo ""
-    echo "subs.sh installed and configured!"
+    echo -e "${GREEN}subs.sh успешно установлен и настроен${RESET}"
 }
 
 install_check() {
@@ -64,7 +70,7 @@ install_check() {
     grep -Fxq "*/1 * * * * /etc/check-connection.sh" "$CRON_FILE" || \
         echo "*/1 * * * * /etc/check-connection.sh" >> "$CRON_FILE"
 
-    echo "check-connection.sh installed!"
+    echo -e "${GREEN}check-connection.sh успешно установлен и настроен${RESET}"
 }
 
 install_all() {
@@ -88,9 +94,9 @@ do
     echo "=============================="
     echo " Podkop Scripts Installer"
     echo "=============================="
-    echo "1) Install subs.sh"
-    echo "2) Install check-connection.sh"
-    echo "3) Install ALL"
+    echo "1) Установить subs.sh"
+    echo "2) Установить check-connection.sh"
+    echo "3) Установить Всё"
     echo "4) Show status"
     echo "0) Exit"
     echo ""
