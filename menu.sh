@@ -53,6 +53,8 @@ install_subs() {
     grep -Fxq "0 0 * * * /etc/subs.sh" "$CRON_FILE" || \
         echo "0 0 * * * /etc/subs.sh" >> "$CRON_FILE"
 
+    /etc/init.d/cron restart
+
     sh "$SUBS_FILE"
 
     echo ""
@@ -80,6 +82,8 @@ install_check() {
     # Проверяем и добавляем только если строки нет
     grep -Fxq "*/1 * * * * /etc/check-connection.sh" "$CRON_FILE" || \
         echo "*/1 * * * * /etc/check-connection.sh" >> "$CRON_FILE"
+
+    /etc/init.d/cron restart
 
     echo -e "${GREEN}check-connection.sh успешно установлен и настроен${RESET}"
     
@@ -130,7 +134,7 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v1.9"
+    echo " Podkop Scripts Installer v2.0"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
