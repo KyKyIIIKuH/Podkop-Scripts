@@ -33,18 +33,13 @@ add_autostart() {
         exit 1
     fi
 
-    # Убираем старые вставки subs.sh, если они есть
-    sed '/# BEGIN SUBS_SH/,/# END SUBS_SH/d' "$RC_LOCAL" > "$TMP_FILE"
-
-    # Убираем старые вставки subs.sh, если они есть
-    sed '/# BEGIN SUBS_SH/,/# END SUBS_SH/d' "$RC_LOCAL" > "$TMP_FILE"
+    # Убираем старые вставки строки /etc/subs.sh, если они есть
+    grep -v "^/etc/subs.sh$" "$RC_LOCAL" > "$TMP_FILE"
     
-    # Добавляем содержимое subs.sh перед exit 0
-    awk -v subs="$SUBS_FILE" '
+    # Вставляем строку перед exit 0
+    awk '
         /exit 0/ {
-            print "# BEGIN SUBS_SH"
-            while((getline line < subs) > 0) print line
-            print "# END SUBS_SH"
+            print "/etc/subs.sh"
         }
         { print }
     ' "$TMP_FILE" > "$RC_LOCAL"
@@ -172,7 +167,7 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v2.1"
+    echo " Podkop Scripts Installer v2.2"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
