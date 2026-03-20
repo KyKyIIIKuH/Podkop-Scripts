@@ -17,6 +17,42 @@ CHECK_FILE="/etc/check-connection.sh"
 # Файл crontab пользователя root
 CRON_FILE="/etc/crontabs/root"
 
+RC_LOCAL="/etc/rc.local"
+TMP_FILE="/tmp/rc.local.tmp"
+
+add_autostart() {
+    # Проверяем, что файл rc.local существует
+    if [ ! -f "$RC_LOCAL" ]; then
+        echo "$RC_LOCAL не найден!"
+        exit 1
+    fi
+
+    # Проверяем, что файл subs.sh существует
+    if [ ! -f "$SUBS_FILE" ]; then
+        echo "$SUBS_FILE не найден!"
+        exit 1
+    fi
+
+    # Убираем старые вставки subs.sh, если они есть
+    sed '/# BEGIN SUBS_SH/,/# END SUBS_SH/d' "$RC_LOCAL" > "$TMP_FILE"
+
+    # Убираем старые вставки subs.sh, если они есть
+    sed '/# BEGIN SUBS_SH/,/# END SUBS_SH/d' "$RC_LOCAL" > "$TMP_FILE"
+    
+    # Добавляем содержимое subs.sh перед exit 0
+    awk -v subs="$SUBS_FILE" '
+        /exit 0/ {
+            print "# BEGIN SUBS_SH"
+            while((getline line < subs) > 0) print line
+            print "# END SUBS_SH"
+        }
+        { print }
+    ' "$TMP_FILE" > "$RC_LOCAL"
+    
+    # Восстанавливаем права
+    chmod +x "$RC_LOCAL"
+}
+
 pause() {
     echo ""
     echo "Нажмите любую клавишу для возвращения в меню..."
@@ -56,6 +92,8 @@ install_subs() {
     /etc/init.d/cron restart
 
     sh "$SUBS_FILE"
+
+    add_autostart
 
     echo ""
     echo -e "${GREEN}subs.sh успешно установлен и настроен${RESET}"
@@ -134,7 +172,7 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v2.0"
+    echo " Podkop Scripts Installer v2.1"
     echo "=============================="
     echo "1) Установить subs.sh"
     echo "2) Установить check-connection.sh"
