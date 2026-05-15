@@ -4,9 +4,6 @@ CONFIG="/etc/config/podkop"
 TMP_FILE="/tmp/podkop_tmp"
 VLESS_URL="https://ССЫЛКА_НА_ПОДПИСКУ"
 
-# Получаем домен из URL
-DOMAIN=$(echo "$VLESS_URL" | sed -E 's#https?://([^/]+).*#\1#')
-
 log() { echo "[$(date '+%F %T')] $*"; }
 
 # --- Рестарт сервиса ---
@@ -33,7 +30,7 @@ VLESS_LIST=$(wget --no-check-certificate \
 --header="x-hwid: openwrt-router-001" \
 --header="x-device-os: OpenWRT" \
 --header="x-device-model: OpenWrt Router" \
--qO- "$DOMAIN" | base64 -d | grep 'vless://' | grep -v 'xhttp' | grep -v 'App%20not%20supported')
+-qO- "$VLESS_URL" | base64 -d | grep 'vless://' | grep -v 'xhttp' | grep -v 'App%20not%20supported')
 
 if [ -z "$VLESS_LIST" ]; then
     echo "❌ Не удалось получить VLESS список"
