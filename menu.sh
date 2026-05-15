@@ -97,6 +97,49 @@ install_subs() {
     clear
 }
 
+install_subs_no_idn() {
+    echo ""
+    echo "Downloading subs.sh..."
+
+    rm -f "$SUBS_FILE"
+
+    curl -sL "$REPO/subs_no_idn.sh" -o "$SUBS_FILE"
+
+    if [ ! -f "$SUBS_FILE" ]; then
+        echo "Download failed!"
+        return
+    fi
+
+    chmod +x "$SUBS_FILE"
+
+    echo ""
+    echo -e "${YELLOW}Укажите ссылку на подписку: ${RESET}"
+    read VLESS_URL
+
+    if [ -z "$VLESS_URL" ]; then
+        echo -e "${RED}Ссылка подписки не может быть пустой${RESET}"
+        return
+    fi
+
+    sed -i "s|^VLESS_URL=.*|VLESS_URL=\"$VLESS_URL\"|g" "$SUBS_FILE"
+
+    # Проверяем и добавляем только если строки нет
+    grep -Fxq "0 0 * * * /etc/subs.sh" "$CRON_FILE" || \
+        echo "0 0 * * * /etc/subs.sh" >> "$CRON_FILE"
+
+    /etc/init.d/cron restart
+
+    sh "$SUBS_FILE"
+
+    add_autostart
+
+    echo ""
+    echo -e "${GREEN}subs.sh успешно установлен и настроен${RESET}"
+    
+    pause
+    clear
+}
+
 install_check() {
     echo ""
     echo "Downloading check-connection.sh..."
@@ -167,13 +210,14 @@ while true
 do
     echo ""
     echo "=============================="
-    echo " Podkop Scripts Installer v2.2"
+    echo " Podkop Scripts Installer v2.3"
     echo "=============================="
     echo "1) Установить subs.sh"
-    echo "2) Установить check-connection.sh"
-    echo "3) Установить Всё"
-    echo "4) Show status"
-    echo "5) Update menu"
+    echo "2) Установить subs_no_idn.sh"
+    echo "3) Установить check-connection.sh"
+    echo "4) Установить Всё"
+    echo "5) Show status"
+    echo "6) Update menu"
     echo "0) Exit"
     echo ""
 
@@ -182,10 +226,11 @@ do
 
     case "$choice" in
         1) install_subs ;;
-        2) install_check ;;
-        3) install_all ;;
-        4) show_status ;;
-        5) self_update ;;
+        2) install_subs_no_idn ;;
+        3) install_check ;;
+        4) install_all ;;
+        5) show_status ;;
+        6) self_update ;;
         0) exit 0 ;;
         *) exec "/etc/$SELF" ;;
     esac
