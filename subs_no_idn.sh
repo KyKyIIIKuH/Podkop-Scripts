@@ -26,7 +26,7 @@ restart_target() {
 
 # --- Получаем список и декодируем base64 ---
 VLESS_LIST=$(wget --no-check-certificate \
---header="User-Agent: v2rayNG/1.10.5" \
+--header="User-Agent: v2rayNG" \
 --header="x-hwid: openwrt-router-001" \
 --header="x-device-os: OpenWRT" \
 --header="x-device-model: OpenWrt Router" \
